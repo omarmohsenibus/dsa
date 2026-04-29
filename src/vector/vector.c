@@ -118,3 +118,25 @@ bool vector_insert_at_index(vector *v, const size_t index, const void *element) 
   v->size += 1;
   return true;
 }
+
+bool vector_delete_at_index(vector *v, const size_t index, void *delete_element) {
+  if (v == NULL || v->data == NULL)
+    return false;
+
+  if (index >= v->size)
+    return false;
+
+  void *target = vector_get_at_index_internal(v, index);
+
+  if (delete_element != NULL)
+    memcpy(delete_element, target, v->data_sz);
+
+
+  const void *source = target + v->data_sz;
+  const size_t bytes_to_move = (v->size - index - 1) * v->size;
+  // Shifting: starting from `source` (index position) move `bytes_to_move` bytes into new position `target`
+  memmove(target, source, bytes_to_move);
+  v->size -= 1;
+
+  return true;
+}

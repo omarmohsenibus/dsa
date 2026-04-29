@@ -131,6 +131,30 @@ void vector_insert_at_index_std_case() {
   vector_delete(v);
 }
 
+void vector_delete_at_index_std_case() {
+  const int initial_capacity = 5;
+  const int data_sz = sizeof(int);
+  vector *v = vector_init(initial_capacity, data_sz);
+  assert(v != NULL);
+  assert(vector_get_size(v) == 0);
+  assert(vector_get_capacity(v) == initial_capacity);
+
+  const int a = 10;
+  const int b = 20;
+
+  int delete_b;
+  vector_push_back(v, &a);
+  vector_push_back(v, &b);
+
+  const bool ret = vector_delete_at_index(v, 1, &delete_b);
+
+  assert(ret);
+  assert(b == delete_b);
+  assert(vector_get_size(v) == 1);
+
+  vector_delete(v);
+}
+
 
 int main(void) {
   //vector_init_std_case();
@@ -141,7 +165,8 @@ int main(void) {
 
   // vector_push_back_std_case();
   // vector_push_back_std_case_str();
-  vector_insert_at_index_std_case();
+  // vector_insert_at_index_std_case();
+  vector_delete_at_index_std_case();
 
   return 0;
 }

@@ -62,6 +62,17 @@ extern bool vector_pop_back(vector *v);
  */
 extern bool vector_insert_at_index(vector *v, size_t index, const void *element);
 
+/**
+ * @brief Deletes an element at a specific index, shifting subsequent elements
+ * @param v: Pointer to the vector
+ * @param index: Target position (must be <= size)
+ * @param delete_element: Pointer to the deleted element: Output
+ * @return true on success, false on OOM or invalid index.
+ * @warning O(N) due to shifting memory
+ */
+
+extern bool vector_delete_at_index(vector *v, size_t index, void *delete_element);
+
 
 extern void vector_set_at_index();
 
