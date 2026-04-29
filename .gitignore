@@ -1,0 +1,19 @@
+# Compilazione e Build
+cmake-build-*/
+.cmake/
+CMakeFiles/
+CMakeCache.txt ; file di cache di cmake
+*.cmake
+*.a
+*.o
+*.so
+*.dll
+*.exe
+*.out
+
+# File specifici di CLion / JetBrains
+.idea/
+
+# File di sistema
+.DS_Store
+Thumbs.db
