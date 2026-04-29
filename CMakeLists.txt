@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 4.2)
+cmake_minimum_required(VERSION 3.25)
 project(dsa C)
 
 add_compile_options(-Wall -Werror -O0)
@@ -12,6 +12,18 @@ add_library(dsa_core STATIC
         src/vector/vector.c
 )
 
-# --- Vector Test ---
-add_executable(test_vector tests/vector/test_vector.c)
-target_link_libraries(test_vector dsa_core)
+# Testing: Criterion
+enable_testing()
+find_library(CRITERION_LIB criterion)
+if(CRITERION_LIB)
+    # --- Vector Test ---
+    add_executable(test_vector tests/vector/test_vector.c)
+    target_link_libraries(test_vector dsa_core ${CRITERION_LIB})
+    # --- Vector Test ---
+
+    add_test(NAME AllTests COMMAND test_vector)
+else()
+    message(WARNING "Criterion not found!")
+endif ()
+
+
